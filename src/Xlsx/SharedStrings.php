@@ -24,12 +24,18 @@ class SharedStrings extends AbstractXMLDictionnary
         $xml = $this->getXMLReader();
         while ($xml->read()) {
             if (\XMLReader::ELEMENT === $xml->nodeType) {
+                while ($xml->name === 'rPh') {
+                    $xml->next();
+                    continue;
+                }
+
                 switch ($xml->name) {
                     case 'si' :
                         $this->currentIndex++;
+                        $this->values[$this->currentIndex] = '';
                         break;
                     case 't' :
-                        $this->values[$this->currentIndex] = $xml->readString();
+                        $this->values[$this->currentIndex] .= $xml->readString();
 
                         return;
                 }

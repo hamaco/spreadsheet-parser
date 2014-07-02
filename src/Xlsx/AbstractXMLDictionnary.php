@@ -30,7 +30,7 @@ abstract class AbstractXMLDictionnary extends AbstractXMLResource
      */
     public function get($index)
     {
-        while ($this->valid && !isset($this->values[$index])) {
+        while ($this->valid && !isset($this->values[$index+1])) {
             $this->readNext();
         }
         if ((!isset($this->values[$index]))) {
